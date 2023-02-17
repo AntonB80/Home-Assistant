@@ -1,0 +1,551 @@
+# Блок объединения по горизонтали
+#      - type: horizontal-stack
+#        cards:
+
+# Блок объединения по вертикали 
+#      - type: vertical-stack
+#        cards:
+
+# Разделительная Полоса
+# - type: divider
+
+title: Artesa
+views:
+
+  - title: Comfort
+    icon: mdi:home-analytics
+    cards:
+# Блок объединения по вертикали 
+    - type: vertical-stack
+      cards:
+
+# Климат в спальне Климат в спальне Климат в спальне Климат в спальне Климат в спальне 
+        - type: markdown
+          content: >
+            **Bedroom**
+            <ha-icon icon="mdi:bed-king-outline"></ha-icon>
+
+        - type: entities
+          content: >
+            **Bedroom**
+            <ha-icon icon="mdi:bed-king-outline"></ha-icon>
+          entities:
+            - entity: sensor.0x00158d000xxxxxxx_temperature
+              type: custom:multiple-entity-row
+              icon: mdi:bed-queen
+              name: Спальня
+              state_header: Температура
+              entities:
+                - entity: sensor.0x00158d000xxxxxxx_humidity
+                  name: Влажность
+                - entity: sensor.0x00158d000xxxxxxx_battery
+                  name: Уровень заряда
+            - entity: binary_sensor.0xa4c138009xxxxxxx_contact
+              type: custom:multiple-entity-row
+              icon: mdi:door
+              name: Door Do Balcony
+              secondary_info: last-changed
+            - entity: climate.aqara_air_conditioning_companion
+            - entity: media_player.samsung
+              secondary_info: last-changed
+# Кондиционер Кондиционер Кондиционер Кондиционер Кондиционер Кондиционер Кондиционер Кондиционер 
+            - type: custom:simple-thermostat
+              entity: climate.aqara_air_conditioning_companion
+              secondary_info: last-changed
+              step_size: 1
+              control:
+                  hvac:
+                    some_mode: false
+                    another_mode: false
+                    'off':
+                      name: false
+                      icon: hass:power
+                    'heat':
+                      name: false
+                      icon: mdi:fire
+                    'cool':
+                      name: false
+                      icon: mdi:snowflake
+                    'auto':
+                      name: false
+                      icon: hass:autorenew
+                    'dry':
+                      name: false
+                      icon: mdi:water-percent
+                    'fan_only':
+                      name: false
+                      icon: hass:fan
+
+# Климат На Кухне Климат На Кухне Климат На Кухне Климат На Кухне Климат На Кухне
+
+# Блок объединения по вертикали 
+    - type: vertical-stack
+      cards:
+
+        - type: custom:banner-card
+          background: 'url("/local/IMG_0108_01.png")'
+          heading: "\U0001F95E Kitchen \U0001F363"
+          link: /config/areas/area/kitchen
+          row_size: 4
+          entities:
+            - entity: sensor.0x00158d000xxxxxxx_temperature
+              icon: mdi:fridge-outline
+              name: Кухня
+            - entity: sensor.0x00158d000xxxxxxx_temperature
+              name: Температура
+            - entity: sensor.0x00158d000xxxxxxx_humidity
+              name: Влажность
+            - entity: sensor.0x00158d000xxxxxxx_battery
+              name: Уровень заряда
+
+            - entity: switch.0x00158d000xxxxxxx_l1
+              type: custom:multiple-entity-row
+              icon: mdi:dip-switch
+              toggle: true
+              state_color: true
+              secondary_info: last-changed
+              name: Реле Aqara Котел
+              state_header: 1 линия
+              entities:
+              - entity: sensor.0x00158d000xxxxxxx_voltage
+                name: Напряжение
+              - entity: sensor.0x00158d000xxxxxxx_power
+                name: Мощность
+              - entity: switch.0x00158d000xxxxxxx_l2
+                state_header: Состояние
+                name: 2 линия
+                toggle: true
+
+# TV samsung TV samsung TV samsung TV samsung 
+        - type: media-control
+          entity: media_player.samsung
+
+#Котел Котел Котел Котел Котел Котел Котел Котел Котел Котел Котел 
+        - type: thermostat
+          entity: climate.boiler
+
+# Блок объединения по вертикали 
+    - type: vertical-stack
+      cards:
+
+# Погода OpenWeatherMap Погода OpenWeatherMap Погода OpenWeatherMap Погода OpenWeatherMap Погода OpenWeatherMap 
+        - type: custom:clock-weather-card
+          entity: weather.openweathermap
+          title: Home Artesa
+          sun_entity: sun.sun
+          weather_icon_type: line
+          animated_icon: true
+          forecast_days: 5
+          locale: ru
+          time_format: 24
+          date_pattern: P
+          hide_today_section: false
+          hide_forecast_section: false
+
+# Прихожая Прихожая Прихожая Прихожая Прихожая Прихожая Прихожая Прихожая Прихожая Прихожая
+        - type: custom:banner-card
+          background: 'url("/local/IMG_0104_01.png")'
+          heading: "\U0001F6EB Hallway \U0001F5FD"
+          link: /config/areas/area/hallway
+          entities:
+            - entity: switch.0xa4c138dddxxxxxxx
+              type: custom:multiple-entity-row
+              icon: mdi:ceiling-light-multiple-outline
+              toggle: true
+              state_color: true
+              name: Relay Hallway TuYa
+              secondary_info: last-changed
+              state_header: Состояние
+
+# Bathroom Bathroom Bathroom Bathroom Bathroom Bathroom Bathroom Bathroom Bathroom Bathroom
+        - type: custom:banner-card
+          background: 'url("/local/IMG_0103.png")'
+          heading: "\U0001F6C1 Bathroom \U0001F6C1"
+          link: /config/areas/area/bathroom
+          entities:
+            - entity:
+
+# Loggia Loggia Loggia Loggia Loggia Loggia Loggia Loggia Loggia Loggia Loggia Loggia
+        - type: custom:banner-card
+          background: 'url("/local/IMG_0110_01.png")'
+          heading: "\U0001FA9F Loggia \U0001FA9F"
+          link: /config/areas/area/loggia
+          entities:
+            - entity: switch.0xa4c13801cxxxxxxx
+              type: custom:multiple-entity-row
+              icon: mdi:power-socket-eu
+              toggle: true
+              state_color: true
+              name: Розетка TuYa Гирлянда
+              secondary_info: last-changed
+              state_header: Состояние
+
+# Следующая вкладка 2 Следующая вкладка 2 Следующая вкладка 2 Следующая вкладка 2 Следующая вкладка 2 Следующая вкладка 2 
+
+# Системные показатели Home Assistant
+  - title: Главная
+    icon: mdi:home-assistant
+    cards:
+
+# Блок объединения по вертикали 
+    - type: vertical-stack
+      cards:
+
+      - type: custom:banner-card
+        background: 'url("/local/Home Assistant Wallpaper V1 - Imgur.png")'
+        heading: "\U0000267B Состояние \U0000267B"
+        color: '#FFFAFA'
+        row_size: 4
+        entities:
+          - entity: sensor.online_custom
+            name: Online
+          - entity: sensor.last_boot_custom
+            name: Last boot
+          - entity: sensor.time
+          - entity: sensor.date
+          - entity: sensor.memory_use_percent
+            name: Загрузка ОЗУ
+          - entity: sensor.processor_use
+            name: Загрузка CPU
+          - entity: sensor.disk_use_percent
+            name: Диск заполнен
+          - entity: sensor.disk_free
+            name: Свободное место
+
+
+# Блок объединения по горизонтали
+      - type: horizontal-stack
+        cards:
+
+        - type: gauge
+          name: Загрузка ОЗУ
+          unit: '%'
+          entity: sensor.memory_use_percent
+          severity:
+             green: 0
+             yellow: 60
+             red: 85
+
+        - type: gauge
+          name: Загрузка CPU
+          unit: '%'
+          entity: sensor.processor_use
+          severity:
+             green: 0
+             yellow: 60
+             red: 85
+
+# Блок объединения по горизонтали
+      - type: horizontal-stack
+        cards:
+
+        - type: gauge
+          name: Диск заполнен
+          unit: '%'
+          entity: sensor.disk_use_percent
+          severity:
+             green: 0
+             yellow: 60
+             red: 85    
+
+        - type: gauge
+          name: Свободное место
+          unit: 'Гб'
+          entity: sensor.disk_free
+          severity:
+             red: 2
+             yellow: 6
+             green: 8
+
+# Блок объединения по вертикали 
+    - type: vertical-stack
+      cards:
+
+      - type: custom:banner-card
+        background: 'url("/local/foto1_1.png")'
+        heading: "\U0001F4BD Backup"
+        row_size: 2
+        entities:
+          - entity: sensor.last_google_backup_main
+          - entity: sensor.backups_in_google_drive
+          - entity: sensor.backups_in_home_assistant
+          - entity: sensor.size_in_google_drive
+          - entity: sensor.size_in_home_assistant
+
+# Объем база данных MariaDB
+      - type: custom:banner-card
+        background: '#FFFAFA'
+        heading: "\U00002601 MariaDB"
+        entities:
+          - entity: sensor.maria_db_size
+            type: custom:multiple-entity-row
+            name: Объем БД
+
+# История сжатия база данных MariaDB
+      - type: history-graph
+        entities:
+         - entity: sensor.maria_db_size
+           name: Maria DB
+
+# Состояние батареек
+      - type: markdown
+        content: "### <center> Device Battery Info </center>"
+      - type: "custom:auto-entities"
+        filter:
+          include:
+            - group: group.battery_devices
+          exclude:
+            - entity_id: sensor.mirobot_1s_battery
+        sort:
+          method: state
+          numeric: true
+        card:
+          type: "custom:flex-table-card"
+          clickable: false
+          columns:
+            - data: friendly_name
+              name: Friendly Name
+              modify: '(x+"").replace(/ Battery$/,"").replace(/ power$/,"")'
+            - data: state
+              name: Remaining
+              #modify: "isNaN(parseInt(x, 10)) ? 0 : parseInt(x, 10)"
+              modify: x+' %'
+          css:
+            table+: "padding-top: 2px;"
+            "tbody tr:nth-child(even)": "background-color: #a2542f6;"
+            td.left: "padding: 2px 2px 2px 2px"
+            th.left: "padding: 0px 0px 2px 2px"
+
+# Следующая вкладка Roborock   ma Следующая вкладка Roborock   maСледующая вкладка Roborock   ma Следующая вкладка Roborock   ma
+
+# Робот пылесос Roborock   Робот пылесос Roborock   Робот пылесос Roborock  
+  - title: Roborock  
+    icon: mdi:robot-vacuum
+    cards:
+# Управление Roborock  
+      - type: custom:xiaomi-vacuum-card
+        entity: vacuum.roborock
+        image: /local/community/lovelace-xiaomi-vacuum-card/vacuum.png
+        name: Roborock  
+        vendor: xiaomi
+# Карта Roborock  
+      - type: entities
+        store_map_raw: true
+        camera_calibration: true
+        entities:
+        - camera.xiaomi_cloud_map_extractor
+
+
+
+# Следующая вкладка 4 TESTСледующая вкладка 4 TESTСледующая вкладка 4 TESTСледующая вкладка 4 TEST
+
+# Системные показатели Home Assistant
+  - title: TEST
+    icon: mdi:ab-testing
+    # mdi:test-tube
+    cards:
+
+# Красивые карточки test Красивые карточки test Красивые карточки test Красивые карточки test Красивые карточки test
+
+# Emoji Unicode Tables - https://unicode.org/emoji/charts/full-emoji-list.html
+
+      - type: custom:banner-card
+#        row_size: 1
+#        style: |
+ #         ha-card .heading {
+  #          color: white;
+   #         font-size: 2em;
+    #        margin-top: 15px;
+     #       margin-bottom: 15px;
+      #    }
+
+
+
+        background: 'url("/local/IMG_4361_02.png")'
+        heading: "\U0001F6CF Bedroom \U0001F6CC"
+        color: '#FF00FF'
+        link: /config/areas/area/bedroom
+        row_size: 4
+
+
+        entities:
+            
+            
+          - entity: sensor.0x00158d000xxxxxxx_temperature
+            icon: mdi:bed-queen
+            name: Климат
+          - entity: sensor.0x00158d000xxxxxxx_temperature
+            name: Температура
+
+          - entity: sensor.0x00158d000xxxxxxx_humidity
+            name: Влажность
+          - entity: sensor.0x00158d000xxxxxxx_battery
+            name: Уровень заряда
+    
+        
+        
+        
+        
+          - entity: sensor.0x00158d000xxxxxxx_temperature
+            type: custom:multiple-entity-row
+            icon: mdi:bed-queen
+            name: Климат
+            state_header: Температура
+            entities:
+              - entity: sensor.0x00158d000xxxxxxx_humidity
+                name: Влажность
+              - entity: sensor.0x00158d000xxxxxxx_battery
+                name: Уровень заряда
+
+# дверь на балкон дверь на балкон дверь на балкон дверь на балкон дверь на балкон дверь на балкон
+          - entity: binary_sensor.0xa4c138009xxxxxxx_contact
+            type: custom:multiple-entity-row
+            map_state:
+              "off":
+                icon: mdi:door-closed-lock
+              "on":
+                icon: mdi:door-open
+            state_color: true
+            name: Door To Balcony
+            secondary_info: last-changed
+# кондиционер кондиционер кондиционер кондиционер кондиционер кондиционер кондиционер
+          - type: custom:simple-thermostat
+            entity: climate.aqara_air_conditioning_companion
+            step_size: 1
+            control:
+                hvac:
+                  some_mode: false
+                  another_mode: false
+                  'off':
+                    name: false
+                    icon: hass:power
+                  'heat':
+                    name: false
+                    icon: mdi:fire
+                  'cool':
+                    name: false
+                    icon: mdi:snowflake
+                  'auto':
+                    name: false
+                    icon: hass:autorenew
+                  'dry':
+                    name: false
+                    icon: mdi:water-percent
+                  'fan_only':
+                    name: false
+                    icon: hass:fan
+
+          - type: media-control
+            entity: media_player.samsung
+
+
+
+            map_state:
+              playing: mdi:monitor
+              not_playing:
+                value: mdi:monitor-off
+                name: A custom entity heading
+
+      - type: media-control
+        entity: media_player.samsung
+
+
+
+# Красивые карточки test Красивые карточки test Красивые карточки test Красивые карточки test Красивые карточки test
+
+
+      - type: custom:banner-card
+        background: 'url("/local/IMG_0103_01.png")'
+        heading: "\U0001F6C1 Bathroom \U0001F6C1"
+        
+
+        
+        
+        
+        row_size: 4
+        entities:
+
+
+          - entity: sensor.memory_use_percent
+            name: Is it on?
+            domain: sensor
+
+            color: black
+            map_state:
+              "{% elif states('sensor.memory_use_percent') | float > 10  %}":
+                color: yellow
+
+
+          - entity: sensor.memory_use_percent
+            name: Загрузка ОЗУ
+
+          - entity: sensor.processor_use
+            name: Загрузка CPU
+
+          - entity: sensor.disk_use_percent
+            name: Диск заполнен
+
+          - entity: sensor.disk_free
+            name: Свободное место
+
+
+
+
+
+
+
+
+
+      - type: custom:banner-card
+        background: 'url("/local/IMG_0108_01.png")'
+        heading: "\U0001F95E Kitchen \U0001F363"
+        link: /config/areas/area/kitchen
+        row_size: 4
+        entities:
+          - entity: sensor.0x00158d000xxxxxxx_temperature
+            icon: mdi:fridge-outline
+            name: Кухня
+          - entity: sensor.0x00158d000xxxxxxx_temperature
+            name: Температура
+          - entity: sensor.0x00158d000xxxxxxx_humidity
+            name: Влажность
+          - entity: sensor.0x00158d000xxxxxxx_battery
+            name: Уровень заряда
+
+
+          - entity: switch.0x00158d000xxxxxxx_l2
+            toggle: true
+
+
+
+          - entity: sensor.0x00158d000xxxxxxx_device_temperature
+            secondary_info: last-changed
+            icon: mdi:dip-switch
+            name: Реле Aqara Котел
+
+          - entity: switch.0x00158d000xxxxxxx_l2
+            name: eeeee
+
+
+
+
+#            toggle: true
+#            state_color: true
+
+          - entity: sensor.0x00158d000xxxxxxx_voltage
+            name: Напряжение
+          - entity: sensor.0x00158d000xxxxxxx_power
+            name: Мощность
+          - entity: switch.0x00158d000xxxxxxx_l1
+            name: 1 линия
+            toggle: true
+
+
+
+
+
+
+
+
+
+

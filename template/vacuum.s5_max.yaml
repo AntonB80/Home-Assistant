@@ -1,0 +1,31 @@
+  - sensors:
+      vaccum_battery:
+        friendly_name: "Battery"
+        device_class: battery
+        unit_of_measurement: '%'
+        icon_template: "{{ state_attr('roborock', 'battery_icon') }}"
+        value_template: "{{ state_attr('roborock', 'battery_level') }}"
+      vaccum_cleaning_time:
+        friendly_name: "Время последней уборки"
+        unit_of_measurement: "min"
+        value_template: "{{ state_attr('roborock', 'cleaning_time') }}"
+      vaccum_main_brush_left:
+        friendly_name: "До замены основной щетки"
+        unit_of_measurement: "h"
+        value_template: "{{ state_attr('roborock', 'main_brush_left') }}"
+      vaccum_side_brush_left:
+        friendly_name: "До замены боковой щетки"
+        unit_of_measurement: "h"
+        value_template: "{{ state_attr('roborock', 'side_brush_left') }}"
+      vaccum_filter_left:
+        friendly_name: "До замены основной фильтра"
+        unit_of_measurement: "h"
+        value_template: "{{ state_attr('roborock', 'filter_left') }}"
+      vaccum_sensor_dirty_left:
+        friendly_name: "До очистки сенсоров"
+        unit_of_measurement: "h"
+        value_template: "{{ state_attr('roborock', 'sensor_dirty_left') }}"
+      vaccum_clean_start:
+        friendly_name: "Дата / время последнего начала уборки"
+        unit_of_measurement: "time_date"
+        value_template: "{{ state_attr('roborock', 'clean_start') }}"

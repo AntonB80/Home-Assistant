@@ -1,0 +1,20 @@
+# Turn off the light in the hallway
+switch_off_light_hallway:
+  sequence:
+    - alias: switch_off_light_hallway
+      condition: state
+      entity_id: switch.0xa4c138dddxxxxxxx
+      state: "on"
+    - service: switch.turn_off
+      entity_id: switch.0xa4c138dddxxxxxxx
+
+# Turn off the light in the hallway after 3 minutes
+switch_off_light_hallway_after_3_min:
+  sequence:
+    - alias: switch_off_light_hallway_after_3_min
+      condition: state
+      entity_id: switch.0xa4c138dddxxxxxxx
+      state: "on"
+    - delay: 00:03:03
+    - service: switch.turn_off
+      entity_id: switch.0xa4c138dddxxxxxxx

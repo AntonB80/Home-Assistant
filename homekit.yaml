@@ -1,0 +1,37 @@
+  filter:
+    include_domains:
+      - media_player
+      - climate
+      - person
+    exclude_entities:
+      - alarm_control_panel.elektrorozetka_peremennogo_toka_alarm
+
+    # automation
+      - automation.roborock_on_above_700_m
+      - automation.switching_air_on_lesst_below_700_m_2
+      - automation.switching_air_on_lesst_above_700_m_2
+      - automation.switching_air_off_lesst_below_700_m_2
+      - automation.switching_air_off_lesst_above_700_m_2
+      
+    # sensor
+      - sensor.0x00158d000636c8a7_power
+      - binary_sensor.updater
+      - binary_sensor.0x00158d000636c8a7_interlock
+
+    include_entities:
+    # script
+      - script.cleaning_the_loggia
+      - script.cleaning_the_kitchen
+      - script.cleaning_the_bedroom
+      - script.cleaning_the_bathroom
+      - script.cleaning_the_hallway
+      - script.cleaning_the_loggia_bathroom
+      - script.switch_off_light_hallway_after_3_min
+      - script.switch_off_tv_kitchen_after_60_min
+      - script.switch_off_tv_kitchen_after_30_min
+
+    # switch
+      - switch.0xa4c138dddxxxxxxx
+      - switch.0xa4c13801cxxxxxxx
+
+

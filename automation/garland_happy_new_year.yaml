@@ -1,0 +1,103 @@
+# Включение гирлянды с 11 месяца по 02 месяц
+#- id: garland_on_new_year
+#  alias: garland_on_new_year
+#  initial_state: true
+# one hour ten minutes after sunset
+#  trigger:
+# ТРИГГЕР ЗАКАТА / ВОСХОДА СОЛНЦА
+#  -  platform: sun
+#     event: sunset
+#     offset: "01:00:00"
+# ТРИГГЕР ВОЗВЫШЕНИЯ СОЛНЦА
+#  - platform: numeric_state
+#    entity_id: sun.sun
+#    attribute: elevation
+# Can be a positive or negative number
+#    below: -12.0
+        
+# условия - 01, 11 и 12 месяца года
+#  condition:
+#    - condition: template
+#      value_template: '{{ now().month in [1,11,12] }}'
+#    - condition: state
+#      entity_id: switch.0xa4c13801ca4f0550
+#      state: 'off'
+# действие
+#  action:
+#      - service: switch.turn_on
+#        entity_id: switch.0xa4c13801ca4f0550
+
+# Выключение гирлянды с 12 месяца по 02 месяц
+#- id: garland_off_new_year
+#  alias: garland_off_new_year
+#  initial_state: true
+# one hour ten minutes after sunset
+#  trigger:
+#    - platform: time
+#      at: "03:03:03"
+# условия - 01, 11 и 12 месяца года
+#  condition:
+#    - condition: template
+#      value_template: '{{ now().month in [1,11,12] }}'
+#    - condition: state
+#      entity_id: switch.0xa4c13801ca4f0550
+#      state: 'on'
+# действие
+#  action:
+#      - service: switch.turn_off
+#        entity_id: switch.0xa4c13801ca4f0550
+
+# Выключение swich гирлянды на лоджии 01.02 в 03.03.03
+#- id: garland_off_01_02
+#  alias: garland_off_01_02
+#  initial_state: true
+#  trigger:
+#    - platform: time
+#      at: "03:03:03"
+#  condition:
+#    - condition: template
+#      value_template: '{{ now().month == 2, now().day == 1 }}'
+
+# Change the number here to get whatever day of the year you want.
+#      value_template: "{{ now().timetuple().tm_yday == 32 }}"
+
+#    - condition: state
+#      entity_id: switch.0xa4c13801ca4f0550
+#      state: 'on'
+#  action:
+#      - service: switch.turn_off
+#        entity_id: switch.0xa4c13801ca4f0550
+
+# Включение swich гирлянды на лоджии 02.02
+#- id: garland_swich_on_after_new_year
+#  alias: garland_swich_on_after_new_year
+#  initial_state: true
+#  trigger:
+#    - platform: time
+#      at: "15:03:03"
+#  condition:
+#    - condition: template
+#      value_template: '{{ now().month == 2, now().day == 1 }}'
+#    - condition: state
+#      entity_id: switch.0xa4c13801ca4f0550
+#      state: 'off'
+#  action:
+#      - service: switch.turn_on
+#        entity_id: switch.0xa4c13801ca4f0550
+
+#      - service: persistent_notification.create
+#        data:
+#          message: |
+#              *Реле на лоджии включено. Проверь гирлянду!*
+#              Розетка TuYa Гирлянда сейчас - {{states('switch.0xa4c13801ca4f0550')}}%!
+
+#      - service: notify.mobile_app_iPhone13,1
+#        data:
+#          message: |
+#              *Реле на лоджии включено. Проверь гирлянду!*
+#              {{states('switch.0xa4c13801ca4f0550')}}%!
+#          data:
+#            push:
+#              category: "Внимание, низкий заряд батареи!"
+#              icon: "sfsymbols:battery.25"
+

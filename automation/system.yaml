@@ -1,0 +1,12 @@
+# Сжатие базы и количество дней, сколько хранится
+- id: compression_base_MariaDB
+  alias: compression_base_MariaDB
+  initial_state: true
+  trigger:
+    - platform: time
+      at: '01:00:00'
+  action:
+    - service: recorder.purge
+      data:
+          keep_days: 5
+          repack: true

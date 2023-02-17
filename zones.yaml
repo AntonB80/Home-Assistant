@@ -1,0 +1,5 @@
+- name: air_conditioning
+  latitude: !secret latitude_coord
+  longitude: !secret longitude_coord
+  radius: 700
+  icon: mdi:air-conditioner

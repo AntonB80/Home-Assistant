@@ -1,0 +1,110 @@
+homeassistant:
+  name: Artesha
+  latitude: !secret latitude_coord
+  longitude: !secret longitude_coord
+  elevation: 5
+  unit_system: metric
+  country: RU
+  time_zone: Europe/Kaliningrad
+
+#Вынос во внешнию папку - Настройки объектов
+# - https://www.home-assistant.io/docs/configuration/customizing-devices/#manual-customization
+  customize: !include_dir_merge_named includes/customize
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Карта lovelace конфигурации
+lovelace:
+  mode: yaml
+  resources:
+# Карточка погоды с часами
+    - url: /hacsfiles/clock-weather-card/clock-weather-card.js
+      type: module
+# Карточка термостата
+    - url: /hacsfiles/simple-thermostat/simple-thermostat.js
+      type: module
+# Карточка робота пылесоса xiaomi roborock
+    - url: /hacsfiles/lovelace-xiaomi-vacuum-card/xiaomi-vacuum-card.js
+      type: module
+# Карточка Карты робота пылесоса xiaomi roborock
+    - url: /hacsfiles/lovelace-xiaomi-vacuum-map-card/xiaomi-vacuum-map-card.js
+      type: module
+# Автоматически заполнять карты Lovelace сущностями, соответствующими определенным критериям.
+    - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
+      type: module
+    - url: /hacsfiles/flex-table-card/flex-table-card.js
+      type: module
+# Красивые карточки
+    - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
+      type: module
+# Еще одни Красивые карточки
+    - url: /hacsfiles/banner-card/banner-card.js
+      type: module
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+#Вынос во внешние файлы
+climate: !include includes/climate.yaml
+group: !include includes/groups.yaml
+homekit: !include includes/homekit.yaml
+recorder: !include includes/recorder.yaml
+scene: !include includes/scenes.yaml
+zone: !include includes/zones.yaml
+
+
+#Вынос во внешние папки
+automation: !include_dir_merge_list includes/automation
+binary_sensor: !include_dir_merge_list includes/binary_sensor
+mqtt: !include_dir_merge_named includes/ mqtt_sensor
+script: !include_dir_merge_named includes/scripts
+sensor: !include_dir_merge_list includes/sensor
+template: !include_dir_merge_list includes/template
+
+
+
+
+# Integration Proximity Integration Proximity Integration Proximity Integration Proximity
+proximity:
+  home:
+    devices:
+    - person.antonb
+    tolerance: 30
+    unit_of_measurement: m
+
+# Samsungtv Tizen Samsungtv Tizen Samsungtv Tizen Samsungtv Tizen Samsungtv Tizen Samsungtv Tizen
+samsungtv:
+    host: !secret samsungtv_host
+    mac: !secret samsungtv_mac
+
+# xiaomi roborock xiaomi roborock xiaomi roborock xiaomi roborock
+
+device_tracker:
+  platform: xiaomi_miio
+  host: !secret xiaomi_vacuum_host
+  token: !secret xiaomi_vacuum_token
+
+camera:
+  - platform: xiaomi_cloud_map_extractor
+    host: !secret xiaomi_vacuum_host
+    token: !secret xiaomi_vacuum_token
+    username: !secret xiaomi_cloud_username
+    password: !secret xiaomi_cloud_password
+    draw: ['all']
+    attributes:
+      - calibration_points
+      - room_numbers
+
+logger:
+  default: info
+  logs:
+    custom_components.xiaomi_cloud_map_extractor: debug
+
+
+

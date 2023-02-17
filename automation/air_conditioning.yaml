@@ -1,0 +1,185 @@
+# вкл - true
+# выкл - false
+
+# air conditioning кондиционер air conditioning кондиционер air conditioning кондиционер air conditioning
+
+# Включение кондиционера если больше 700 м, но меньше 45 000 м
+- id: air_on_above_700_m_below_45000_m
+  alias: air_on_above_700_m_below_45000_m
+  initial_state: true
+# Изменение датчика температуры
+  trigger:
+    - platform: state
+      entity_id: sensor. 0x00158d000xxxxxxx_temperature
+# условия - темепература выше (above) 24.7
+  condition:
+    - condition: numeric_state
+      entity_id: proximity.home
+      above: 700 #in meters
+      below: 45000 #in meters
+    - condition: numeric_state
+      entity_id: sensor. 0x00158d000xxxxxxx_temperature
+      above: 24.7
+    - condition: template
+      value_template: "{{now().month>4 and now().month<9}}"
+    - condition: state
+      entity_id: binary_sensor.0xa4c138009xxxxxxx_contact
+      state: 'off'
+    - condition: state
+      entity_id: climate.aqara_air_conditioning_companion
+      state: 'off'
+# действие
+  action:
+    - service: climate.set_hvac_mode
+      target:
+        entity_id: climate.aqara_air_conditioning_companion
+      data:
+        hvac_mode: cool
+
+# Выключение кондиционера если больше 700 м, но меньше 45 000 м
+- id: air_off_above_700_m_below_45000_m
+  alias: air_off_above_700_m_below_45000_m
+  initial_state: true
+# Больше 700 м
+  trigger:
+    - platform: state
+      entity_id: proximity.home
+    - platform: state
+      entity_id: sensor. 0x00158d000xxxxxxx_temperature
+# условия - темепература ниже (below) 24.5
+  condition:
+    - condition: numeric_state
+      entity_id: sensor. 0x00158d000xxxxxxx_temperature
+      below: 24.5
+    - condition: numeric_state
+      entity_id: proximity.home
+      above: 700 #in meters
+      below: 45000 #in meters
+    - condition: template
+      value_template: "{{now().month>4 and now().month<9}}"
+    - condition: state
+      entity_id: climate.aqara_air_conditioning_companion
+      state: cool
+# действие
+  action:
+    - service: climate.set_hvac_mode
+      target:
+        entity_id: climate.aqara_air_conditioning_companion
+      data:
+        hvac_mode: 'off'
+
+# Включение кондиционера если меньше (below) 700 м
+- id: air_on_below_700_m
+  alias: air_on_below_700_m
+  initial_state: true
+# Изменение датчика температуры 
+  trigger:
+    - platform: state
+      entity_id: sensor. 0x00158d000xxxxxxx_temperature
+    - platform: state
+      entity_id: proximity.home
+# условия - темепература выше (above) 22.7
+  condition:
+    - condition: numeric_state
+      entity_id: sensor. 0x00158d000xxxxxxx_temperature
+      above: 22.7
+    - condition: numeric_state
+      entity_id: proximity.home
+      below: 700 #in meters
+    - condition: template
+      value_template: "{{now().month>4 and now().month<9}}"
+    - condition: state
+      entity_id: binary_sensor.0xa4c138009xxxxxxx_contact
+      state: 'off'
+    - condition: state
+      entity_id: climate.aqara_air_conditioning_companion
+      state: 'off'
+# действие
+  action:
+    - service: climate.set_hvac_mode
+      target:
+        entity_id: climate.aqara_air_conditioning_companion
+      data:
+        hvac_mode: cool
+
+# Выключение кондиционера если меньше 700 м
+- id: air_off_below_700_m
+  alias: air_off_below_700_m
+  initial_state: true
+# Изменение датчика температуры
+  trigger:
+    - platform: state
+      entity_id: sensor. 0x00158d000xxxxxxx_temperature
+# условия - темепература ниже 22.5
+  condition:
+    - condition: numeric_state
+      entity_id: proximity.home
+      below: 700 #in meters
+    - condition: numeric_state
+      entity_id: sensor. 0x00158d000xxxxxxx_temperature
+      below: 22.5
+    - condition: template
+      value_template: "{{now().month>4 and now().month<9}}"
+    - condition: state
+      entity_id: climate.aqara_air_conditioning_companion
+      state: cool
+# действие
+  action:
+    - service: climate.set_hvac_mode
+      target:
+        entity_id: climate.aqara_air_conditioning_companion
+      data:
+        hvac_mode: 'off'
+
+# Выключение кондиционера если больше 45 000 м
+- id: air_off_above_45000_m
+  alias: air_off_above_45000_m
+  initial_state: true
+# Больше 700 м
+  trigger:
+    - platform: state
+      entity_id: proximity.home
+# условия - темепература выше (above) 22.8
+  condition:
+    - condition: numeric_state
+      entity_id: proximity.home
+      above: 45000 #in meters
+    - condition: template
+      value_template: "{{now().month>4 and now().month<9}}"
+    - condition: state
+      entity_id: climate.aqara_air_conditioning_companion
+      state: cool
+# действие
+  action:
+    - service: climate.set_hvac_mode
+      target:
+        entity_id: climate.aqara_air_conditioning_companion
+      data:
+        hvac_mode: 'off'
+
+# Выключение кондиционера при открытии балкона через 2 мин.
+- id: air_off_through_2_min
+  alias: air_off_through_2_min
+  initial_state: true
+# открытии балкона больше 2 мин
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.0xa4c138009xxxxxxx_contact
+      to: "on"
+      for:
+        minutes: 2
+# условия - открытии балкона больше 2 мин
+  condition:
+    - condition: state
+      entity_id: climate.aqara_air_conditioning_companion
+      state: cool
+# действие
+  action:
+    - service: climate.set_hvac_mode
+      target:
+        entity_id: climate.aqara_air_conditioning_companion
+      data:
+        hvac_mode: 'off'
+
+
+

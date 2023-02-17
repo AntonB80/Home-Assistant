@@ -1,0 +1,26 @@
+# Включение пылисоса если выше (above) 700m Включение пылисоса если выше (above) 700m 
+- id: roborock_on_above_700_m
+  alias: roborock_on_above_700_m
+  initial_state: true
+# Больше 700 м
+  trigger:
+    - platform: state
+      entity_id: proximity.home
+# условия - расстояние выше (above) 700m
+  condition:
+    - condition: numeric_state
+      entity_id: proximity.home
+      above: 700 #in meters
+    - condition: state
+      entity_id: vacuum.roborock_s5_max
+      state: 'docked'
+    - condition: template
+      value_template: '{{ (as_timestamp(now())-(as_timestamp(state_attr("automation.roborock_on_above_700_m", "last_triggered")))>14400) }}'
+# действие
+  action:
+    - service: xiaomi_miio.vacuum_clean_segment
+      target:
+        entity_id: vacuum.roborock_s5_max
+      data:
+        segments: [18, 17, 17, 21,]
+

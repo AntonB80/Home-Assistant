@@ -1,0 +1,76 @@
+# Siri Уборка На Лоджия
+cleaning_the_loggia:
+  sequence:
+    - alias: сleaning_the_loggia
+      service: vacuum.send_command
+      target:
+        entity_id: vacuum.roborock
+      data:
+        command: app_segment_clean
+        params: [16, 16]
+
+# Siri Уборка На Кухни
+cleaning_the_kitchen:
+  sequence:
+    - alias: сleaning_the_kitchen
+      service: vacuum.send_command
+      target:
+        entity_id: vacuum.roborock
+      data:
+        command: app_segment_clean
+        params: [17, 17]
+
+# Siri Уборка В Спальне
+cleaning_the_bedroom:
+  sequence:
+    - alias: сleaning_the_bedroom
+      service: xiaomi_miio.vacuum_clean_segment
+      target:
+        entity_id: vacuum.roborock
+      data:
+        segments: [18, 18, 18]
+
+# Siri Уборка В Ванной
+cleaning_the_bathroom:
+  sequence:
+    - alias: сleaning_the_bathroom
+      service: vacuum.send_command
+      target:
+        entity_id: vacuum.roborock
+      data:
+        command: app_segment_clean
+        params: [19, 19]
+
+# Siri Уборка В Коридоре
+cleaning_the_hallway:
+  sequence:
+    - alias: сleaning_the_hallway
+      service: vacuum.send_command
+      target:
+        entity_id: vacuum.roborock
+      data:
+        command: app_segment_clean
+        params: [21, 21]
+
+# Siri Уборка На Лоджия И В Ванной
+cleaning_the_loggia_bathroom:
+  sequence:
+    - alias: сleaning_the_loggia_bathroom
+      service: vacuum.send_command
+      target:
+        entity_id: vacuum.roborock
+      data:
+        command: app_segment_clean
+        params: [16, 16, 19, 19]
+
+# Siri Уборка В test loggi
+cleaning_the_test:
+  sequence:
+  - alias: cleaning_the_test
+    service: vacuum.send_command
+    target:
+      entity_id: vacuum.roborock
+    data:
+      command: app_segment_clean
+      params:
+      - segments: [21, 21]

@@ -1,0 +1,31 @@
+# Siri выключение ТВ через 60 мин
+switch_off_tv_kitchen_after_60_min:
+  sequence:
+    - alias: switch_off_tv_kitchen_after_60_min
+      condition: state
+      entity_id: media_player.samsung
+      state: "on"
+    - delay: 01:01:01
+    - service: media_player.turn_off
+      entity_id: media_player.samsung
+
+# Siri выключение ТВ через 30 мин
+switch_off_tv_kitchen_after_30_min:
+  sequence:
+    - alias: switch_off_tv_kitchen_after_30_min
+      condition: state
+      entity_id: media_player.samsung
+      state: "on"
+    - delay: 00:30:30
+    - service: media_player.turn_off
+      entity_id: media_player.samsung
+
+# Выключить TV
+switch_off_tv_kitchen:
+  sequence:
+    - alias: switch_off_tv_kitchen
+      condition: state
+      entity_id: media_player.samsung
+      state: "on"
+    - service: media_player.turn_off
+      entity_id: media_player.samsung

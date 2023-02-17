@@ -1,0 +1,30 @@
+- id: TEST
+  alias: TEST
+  initial_state: false
+  trigger:
+  - platform: state
+    entity_id: switch.0x00158d000636c8a7_l2
+    from: "on"
+    to: "off"
+
+
+  action:
+    - service: persistent_notification.create
+      data:
+        message: "Your message goes here \U0001F50B"
+        title: "Custom subject"
+
+
+    - service: notify.mobile_app_iPhone
+      data:
+        message: |
+            Внимание, низкий заряд батареи!
+        
+#        icon: sfsymbols:macpro.gen2
+        
+        data:
+          url: /lovelace/1
+          image: /local/7cCF.gif
+
+
+
